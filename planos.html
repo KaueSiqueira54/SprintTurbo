@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano Premium — Chama Viva</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Archivo+Black&family=Archivo+Narrow:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #1A5C80;
+  --crimson: #8C1A1A;
+  --teak:    #96512E;
+  --ember:   #E07030;
+  --cream:   rgba(250,246,240,0.8); /* semi‑transparent text color */
+  --cream-solid: #FAF6F0;          /* opaque for backgrounds */
+  --parch:   #F0E8D8;
+  --smoke:   rgba(200,186,168,0.8); /* reduced opacity for secondary text */
+  --deep:    #132232;
+  --gold:    #C9973A;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+/* larger base font for accessibility – double all rem-based sizes */
+html { font-size:200%; }
+
+body {
+  background: var(--deep);
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+}
+body::before {
+  content:''; position:fixed; inset:0; z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; opacity:0.5;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 60px;
+  background:rgba(19,34,50,0.96);
+  border-bottom:1px solid rgba(201,151,58,0.15);
+  backdrop-filter:blur(12px);
+}
+.nav-logo { display:flex; flex-direction:column; line-height:1; }
+.nav-logo .wordmark { font-family:'Archivo Black',sans-serif; font-size:1rem; letter-spacing:0.22em; color:var(--cream); text-transform:uppercase; }
+.nav-logo .tagline { font-family:'Archivo Narrow',sans-serif; font-style:italic; font-size:0.55rem; letter-spacing:0.35em; color:var(--ember); margin-top:2px; }
+.nav-back {
+  display:flex; align-items:center; gap:10px;
+  font-family:'Archivo Narrow',sans-serif; font-style:italic;
+  font-size:0.68rem; letter-spacing:0.25em; color:var(--smoke);
+  text-decoration:none; text-transform:uppercase;
+  transition:color 0.3s;
+}
+.nav-back:hover { color:var(--cream); }
+.nav-back .arrow { font-style:normal; font-size:0.9rem; transition:transform 0.3s; }
+.nav-back:hover .arrow { transform:translateX(-4px); }
+.nav-cta {
+  font-family:'Archivo Black',sans-serif; font-size:0.6rem;
+  letter-spacing:0.25em; text-transform:uppercase; color:var(--deep);
+  background:var(--gold); border:none; padding:12px 28px;
+  cursor:pointer; transition:background 0.3s, transform 0.2s;
+}
+.nav-cta:hover { background:var(--ember); color:var(--cream); transform:translateY(-1px); }
+
+/* ── HERO PLAN ── */
+.plan-hero {
+  min-height: 52vh;
+  background: var(--navy);
+  position: relative; overflow: hidden;
+  display: flex; align-items: flex-end;
+  padding: 120px 80px 80px;
+}
+.plan-hero::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(201,151,58,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(140,26,26,0.25) 0%, transparent 50%),
+    linear-gradient(to bottom, transparent 40%, rgba(19,34,50,0.6));
+}
+.plan-hero::after {
+  content: 'PREMIUM';
+  position: absolute; right:-60px; top:50%; transform:translateY(-50%);
+  font-family:'Archivo Black',sans-serif; font-size:18rem;
+  color:rgba(201,151,58,0.05); letter-spacing:-0.05em;
+  pointer-events:none; user-select:none; line-height:1; white-space:nowrap;
+}
+.hero-content { position:relative; z-index:2; max-width:900px; }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--gold); color:var(--deep);
+  font-family:'Archivo Black',sans-serif; font-size:0.58rem;
+  letter-spacing:0.3em; text-transform:uppercase;
+  padding:8px 20px; margin-bottom:28px;
+}
+.hero-badge .star { font-size:0.7rem; }
+.hero-overline {
+  font-family:'Archivo Narrow',sans-serif; font-style:italic;
+  font-size:0.68rem; letter-spacing:0.45em; color:var(--gold);
+  text-transform:uppercase; margin-bottom:16px;
+}
+.hero-title {
+  font-family:'Cormorant Garamond',serif; font-weight:300;
+  font-size:clamp(3rem,6vw,6.5rem); line-height:0.9;
+  color:var(--cream);
+}
+.hero-title strong { font-weight:700; font-style:italic; color:var(--gold); display:block; }
+.hero-meta-row {
+  display:flex; gap:48px; margin-top:40px; align-items:center;
+  padding-top:32px; border-top:1px solid rgba(201,151,58,0.2);
+}
+.hm-item { display:flex; flex-direction:column; gap:4px; }
+.hm-label { font-family:'Archivo Narrow',sans-serif; font-size:0.48rem; letter-spacing:0.4em; color:var(--gold); text-transform:uppercase; opacity:0.7; }
+.hm-val { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:var(--cream); }
+.hero-price-block {
+  margin-left:auto;
+  display:flex; flex-direction:column; align-items:flex-end; gap:4px;
+}
+.hp-label { font-family:'Archivo Narrow',sans-serif; font-style:italic; font-size:0.55rem; letter-spacing:0.35em; color:var(--gold); text-transform:uppercase; opacity:0.7; }
+.hp-val { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:3.8rem; color:var(--gold); line-height:1; letter-spacing:0.02em; }
+.hp-sub { font-family:'Inter',sans-serif; font-weight:300; font-size:0.6rem; color:rgba(200,186,168,0.5); letter-spacing:0.15em; }
+
+/* ── INCLUDES STRIP ── */
+.includes-strip {
+  background:var(--gold);
+  padding:20px 80px;
+  display:flex; align-items:center; gap:0;
+  overflow:hidden;
+}
+.inc-item {
+  display:flex; align-items:center; gap:10px;
+  flex:1; justify-content:center;
+  padding:0 20px;
+  border-right:1px solid rgba(19,34,50,0.2);
+}
+.inc-item:last-child { border-right:none; }
+.inc-icon { font-size:1.1rem; }
+.inc-text { font-family:'Archivo Narrow',sans-serif; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--deep); font-weight:600; }
+
+/* ── MAIN CONTENT ── */
+.plan-body { background:var(--cream-solid); }
+
+/* section title */
+.cat-section {
+  padding: 0;
+  position:relative;
+}
+.cat-header {
+  background:var(--deep);
+  padding:48px 80px 40px;
+  display:flex; align-items:center; gap:24px;
+  position:relative; overflow:hidden;
+}
+.cat-header::before {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+  background:linear-gradient(to right, var(--gold), var(--ember), transparent);
+}
+.ch-icon { font-size:2rem; flex-shrink:0; }
+.ch-text { display:flex; flex-direction:column; gap:4px; }
+.ch-eyebrow { font-family:'Archivo Narrow',sans-serif; font-style:italic; font-size:0.52rem; letter-spacing:0.4em; color:var(--gold); text-transform:uppercase; }
+.ch-title { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.8rem; color:var(--cream); letter-spacing:0.03em; }
+.ch-total {
+  margin-left:auto;
+  font-family:'Cormorant Garamond',serif; font-weight:700;
+  font-size:2rem; color:var(--gold); letter-spacing:0.02em;
+}
+
+/* items grid */
+.items-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:var(--parch);
+}
+.items-grid.two-col { grid-template-columns:repeat(2,1fr); }
+.items-grid.four-col { grid-template-columns:repeat(4,1fr); }
+.items-grid.six-col { grid-template-columns:repeat(3,1fr); }
+
+.item-card {
+  background:var(--cream-solid);
+  padding:32px 36px;
+  display:flex; flex-direction:column; gap:12px;
+  transition:background 0.25s;
+  cursor:default;
+}
+.item-card:hover { background:#fff; }
+.item-card.dark { background:var(--navy); }
+.item-card.dark:hover { background:#1e6e98; }
+.item-card.mid { background:var(--deep); }
+.item-card.mid:hover { background:#1a2f45; }
+
+.ic-name {
+  font-family:'Cormorant Garamond',serif;
+  font-weight:700; font-size:1.2rem; color:var(--navy);
+  letter-spacing:0.02em; line-height:1.15;
+}
+.item-card.dark .ic-name,
+.item-card.mid .ic-name { color:var(--cream); }
+
+.ic-detail-row { display:flex; align-items:center; gap:6px; }
+.ic-qty {
+  font-family:'Inter',sans-serif; font-weight:400;
+  font-size:0.75rem; color:var(--teak);
+  background:rgba(150,81,46,0.1); padding:3px 10px;
+  border-radius:2px;
+}
+.item-card.dark .ic-qty,
+.item-card.mid .ic-qty { color:var(--smoke); background:rgba(255,255,255,0.08); }
+.ic-unit {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:0.88rem; color:var(--smoke);
+}
+
+.ic-price-row { display:flex; justify-content:space-between; align-items:center; margin-top:4px; }
+.ic-unit-price {
+  font-family:'Inter',sans-serif; font-weight:300;
+  font-size:0.68rem; color:var(--smoke);
+}
+.item-card.dark .ic-unit-price,
+.item-card.mid .ic-unit-price { color:rgba(200,186,168,0.5); }
+.ic-total {
+  font-family:'Archivo Black',sans-serif;
+  font-size:1.1rem; color:var(--ember); letter-spacing:0.02em;
+}
+.item-card.dark .ic-total { color:var(--gold); }
+.item-card.mid .ic-total { color:var(--gold); }
+
+/* service card (estrutura/DJ) */
+.service-card {
+  background:var(--cream-solid);
+  padding:32px 36px;
+  display:flex; justify-content:space-between; align-items:center;
+  transition:background 0.25s; cursor:default;
+}
+.service-card:hover { background:#fff; }
+.service-card.dark { background:var(--navy); }
+.service-card.dark:hover { background:#1e6e98; }
+.sc-left { display:flex; flex-direction:column; gap:6px; }
+.sc-name { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.2rem; color:var(--navy); }
+.service-card.dark .sc-name { color:var(--cream); }
+.sc-desc { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.9rem; color:var(--smoke); }
+.sc-price {
+  font-family:'Archivo Black',sans-serif;
+  font-size:1.2rem; color:var(--ember); letter-spacing:0.02em;
+}
+.service-card.dark .sc-price { color:var(--gold); }
+
+/* summary section */
+.summary-section {
+  background:var(--deep);
+  padding:80px;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:3px; align-items:start;
+}
+.sum-table-wrap { display:flex; flex-direction:column; gap:0; }
+.sum-eyebrow { font-family:'Archivo Narrow',sans-serif; font-style:italic; font-size:0.6rem; letter-spacing:0.4em; color:var(--gold); text-transform:uppercase; margin-bottom:28px; }
+.sum-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 0;
+  border-bottom:1px solid rgba(200,186,168,0.08);
+}
+.sum-row:last-child { border:none; }
+.sum-cat { display:flex; align-items:center; gap:14px; }
+.sum-ico { font-size:1rem; width:22px; text-align:center; }
+.sum-name { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:var(--cream); }
+.sum-val { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; color:var(--smoke); }
+.sum-row.highlight .sum-name { color:var(--gold); }
+.sum-row.highlight .sum-val { color:var(--gold); font-size:1.3rem; }
+
+.total-panel {
+  background:var(--crimson);
+  padding:60px 52px;
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; text-align:center; gap:16px;
+  position:relative; overflow:hidden;
+}
+.total-panel::before { content:''; position:absolute; inset:16px; border:1px solid rgba(250,246,240,0.12); }
+.total-panel::after {
+  content:'★';
+  position:absolute; font-size:20rem; color:rgba(255,255,255,0.025);
+  pointer-events:none; user-select:none;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:'Cormorant Garamond',serif;
+}
+.tp-badge {
+  position:relative; z-index:2;
+  background:var(--gold); color:var(--deep);
+  font-family:'Archivo Black',sans-serif; font-size:0.55rem;
+  letter-spacing:0.3em; text-transform:uppercase; padding:6px 18px;
+}
+.tp-label { font-family:'Archivo Narrow',sans-serif; font-style:italic; font-size:0.6rem; letter-spacing:0.4em; color:rgba(250,246,240,0.5); text-transform:uppercase; position:relative; z-index:2; }
+.tp-val { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:4.5rem; line-height:1; color:var(--cream); position:relative; z-index:2; letter-spacing:0.02em; }
+.tp-divider { width:60px; height:1px; background:rgba(250,246,240,0.2); position:relative; z-index:2; }
+.tp-per { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; color:rgba(250,246,240,0.6); position:relative; z-index:2; }
+.tp-note { font-family:'Inter',sans-serif; font-weight:300; font-size:0.55rem; letter-spacing:0.15em; color:rgba(250,246,240,0.35); text-align:center; max-width:220px; line-height:1.7; position:relative; z-index:2; text-transform:uppercase; }
+
+/* ── HIGHLIGHTS / DIFFERENTIALS ── */
+.differentials {
+  background:var(--navy);
+  padding:80px;
+}
+.diff-eyebrow { font-family:'Archivo Narrow',sans-serif; font-style:italic; font-size:0.62rem; letter-spacing:0.45em; color:var(--gold); text-transform:uppercase; margin-bottom:16px; }
+.diff-title { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(2rem,3vw,3rem); color:var(--cream); margin-bottom:56px; }
+.diff-title em { font-style:italic; font-weight:700; color:var(--gold); }
+.diff-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+.diff-item {
+  padding:40px 36px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(201,151,58,0.12);
+  position:relative; overflow:hidden;
+  transition:border-color 0.3s, background 0.3s;
+}
+.diff-item:hover { border-color:rgba(201,151,58,0.4); background:rgba(201,151,58,0.05); }
+.diff-item::before { content:''; position:absolute; bottom:0; left:0; width:100%; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
+.diff-item:hover::before { transform:scaleX(1); }
+.di-icon { font-size:1.8rem; margin-bottom:18px; display:block; }
+.di-title { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.25rem; color:var(--cream); margin-bottom:10px; }
+.di-desc { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:0.95rem; line-height:1.75; color:var(--smoke); }
+
+/* ── CTA ── */
+.plan-cta {
+  background:var(--crimson);
+  padding:100px 80px;
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+.plan-cta::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 0%, rgba(224,112,48,0.3) 0%, transparent 60%);
+}
+.cta-inner { position:relative; z-index:2; }
+.cta-eyebrow { font-family:'Archivo Narrow',sans-serif; font-style:italic; font-size:0.65rem; letter-spacing:0.45em; color:rgba(250,246,240,0.5); text-transform:uppercase; margin-bottom:20px; }
+.cta-title { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(2.5rem,4vw,4.5rem); color:var(--cream); line-height:1; margin-bottom:14px; }
+.cta-title em { font-style:italic; font-weight:700; }
+.cta-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.15rem; color:rgba(250,246,240,0.65); margin-bottom:52px; line-height:1.7; }
+.cta-btn {
+  display:inline-block; font-family:'Archivo Black',sans-serif;
+  font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--deep); background:var(--gold);
+  border:none; padding:20px 56px; cursor:pointer;
+  transition:background 0.3s, transform 0.2s; text-decoration:none;
+}
+.cta-btn:hover { background:var(--ember); color:var(--cream); transform:translateY(-2px); }
+.cta-note { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.85rem; color:rgba(250,246,240,0.35); margin-top:20px; }
+
+/* ── FOOTER ── */
+footer { background:var(--deep); padding:40px 80px; border-top:1px solid rgba(201,151,58,0.15); display:flex; justify-content:space-between; align-items:center; }
+.foot-logo { font-family:'Archivo Black',sans-serif; font-size:0.9rem; letter-spacing:0.2em; color:var(--cream); }
+.foot-tag { font-family:'Archivo Narrow',sans-serif; font-style:italic; font-size:0.55rem; letter-spacing:0.3em; color:var(--gold); }
+.foot-copy { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.82rem; color:rgba(200,186,168,0.3); }
+.foot-med { width:44px; height:44px; border-radius:50%; border:1px solid rgba(201,151,58,0.35); display:flex; align-items:center; justify-content:center; }
+.foot-med span { font-family:'Archivo Black',sans-serif; font-size:0.65rem; color:var(--gold); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.plan-hero .hero-content > * { animation:fadeUp 0.8s ease both; }
+.plan-hero .hero-badge { animation-delay:0.1s; }
+.plan-hero .hero-overline { animation-delay:0.2s; }
+.plan-hero .hero-title { animation-delay:0.3s; }
+.plan-hero .hero-meta-row { animation-delay:0.45s; }
+
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .plan-hero{padding:110px 32px 60px;}
+  .hero-meta-row{flex-wrap:wrap;gap:24px;}
+  .hero-price-block{margin-left:0;align-items:flex-start;}
+  .includes-strip{padding:16px 24px;flex-wrap:wrap;gap:12px;}
+  .cat-header{padding:36px 32px;}
+  .items-grid{grid-template-columns:1fr;}
+  .items-grid.two-col{grid-template-columns:1fr;}
+  .items-grid.four-col{grid-template-columns:repeat(2,1fr);}
+  .summary-section{grid-template-columns:1fr;padding:48px 32px;}
+  .differentials{padding:60px 32px;}
+  .diff-grid{grid-template-columns:1fr;}
+  .plan-cta{padding:60px 32px;}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:32px;}
+}
+
+/* further tweaks for very small screens */
+@media(max-width:600px){
+  .plan-hero{padding:90px 20px 40px;}
+  .hero-title{font-size:clamp(2.2rem,8vw,5rem);}
+  .hp-val{font-size:3rem;}
+  .hero-meta-row{gap:12px;font-size:0.9rem;}
+  .includes-strip{padding:12px 16px;}
+  .cat-header{padding:28px 20px;}
+  .items-grid.four-col{grid-template-columns:1fr;}
+  .items-grid.six-col{grid-template-columns:1fr;}
+  .sum-table-wrap .sum-row{padding:12px 0;}
+  .total-panel{padding:40px 32px;}
+  .plan-cta{padding:40px 24px;}
+  html{font-size:180%;} /* slightly reduce base for tiny screens */
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="wordmark">Chama Viva</span>
+    <span class="tagline">— Grand Buffet Event —</span>
+  </div>
+  <a href="index.html" class="nav-back">
+    <span class="arrow">←</span> Voltar aos Planos
+  </a>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Contratar Agora</button>
+</nav>
+
+<!-- HERO -->
+<section class="plan-hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="star">★</span> Plano Selecionado <span class="star">★</span></div>
+    <div class="hero-overline">— Chama Viva · Buffet Premium —</div>
+    <h1 class="hero-title">
+      Plano
+      <strong>Premium</strong>
+    </h1>
+    <div class="hero-meta-row">
+      <div class="hm-item"><span class="hm-label">Convidados</span><span class="hm-val">50 pessoas</span></div>
+      <div class="hm-item"><span class="hm-label">Duração</span><span class="hm-val">18h → 23h30</span></div>
+      <div class="hm-item"><span class="hm-label">Categoria</span><span class="hm-val">Grand Buffet</span></div>
+      <div class="hm-item"><span class="hm-label">Inclui</span><span class="hm-val">Tudo incluso</span></div>
+      <div class="hero-price-block">
+        <span class="hp-label">Investimento</span>
+        <span class="hp-val">R$ 16.000</span>
+        <span class="hp-sub">valor total · 50 pax</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDES STRIP -->
+<div class="includes-strip">
+  <div class="inc-item"><span class="inc-icon">🥩</span><span class="inc-text">Churrasco Premium</span></div>
+  <div class="inc-item"><span class="inc-icon">🌱</span><span class="inc-text">Opções Veganas</span></div>
+  <div class="inc-item"><span class="inc-icon">🍹</span><span class="inc-text">Open Bar Completo</span></div>
+  <div class="inc-item"><span class="inc-icon">🍰</span><span class="inc-text">Mesa de Sobremesas</span></div>
+  <div class="inc-item"><span class="inc-icon">🎧</span><span class="inc-text">DJ Incluso</span></div>
+  <div class="inc-item"><span class="inc-icon">🪑</span><span class="inc-text">Estrutura Completa</span></div>
+</div>
+
+<!-- BODY -->
+<div class="plan-body">
+
+  <!-- ESTAÇÃO DE CHURRASCO -->
+  <div class="cat-section">
+    <div class="cat-header">
+      <span class="ch-icon">🥩</span>
+      <div class="ch-text">
+        <span class="ch-eyebrow">01 — Proteínas</span>
+        <span class="ch-title">Estação de Churrasco</span>
+      </div>
+      <span class="ch-total">R$ 785</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card dark">
+        <div class="ic-name">Picanha Prime</div>
+        <div class="ic-detail-row"><span class="ic-qty">6 kg</span><span class="ic-unit">· brasa viva, fatiada à mesa</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 75/kg</span><span class="ic-total">R$ 450</span></div>
+      </div>
+      <div class="item-card dark">
+        <div class="ic-name">Fraldinha</div>
+        <div class="ic-detail-row"><span class="ic-qty">5 kg</span><span class="ic-unit">· ponto perfeito, descansada</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 45/kg</span><span class="ic-total">R$ 225</span></div>
+      </div>
+      <div class="item-card dark">
+        <div class="ic-name">Linguiça Toscana</div>
+        <div class="ic-detail-row"><span class="ic-qty">5 kg</span><span class="ic-unit">· artesanal, temperada na casa</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 22/kg</span><span class="ic-total">R$ 110</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHURRASCO VEGETAL -->
+  <div class="cat-section">
+    <div class="cat-header">
+      <span class="ch-icon">🌱</span>
+      <div class="ch-text">
+        <span class="ch-eyebrow">02 — Plant-Based</span>
+        <span class="ch-title">Churrasco Vegetal</span>
+      </div>
+      <span class="ch-total">R$ 250</span>
+    </div>
+    <div class="items-grid four-col">
+      <div class="item-card">
+        <div class="ic-name">Espetinho de Tofu</div>
+        <div class="ic-detail-row"><span class="ic-qty">2 kg</span><span class="ic-unit">· marinado</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 30/kg</span><span class="ic-total">R$ 60</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Espetinho de Cogumelos</div>
+        <div class="ic-detail-row"><span class="ic-qty">2 kg</span><span class="ic-unit">· mix de shitake</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 35/kg</span><span class="ic-total">R$ 70</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Espetinho de Legumes</div>
+        <div class="ic-detail-row"><span class="ic-qty">2 kg</span><span class="ic-unit">· coloridos, temperados</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 20/kg</span><span class="ic-total">R$ 40</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Hambúrguer Vegetal</div>
+        <div class="ic-detail-row"><span class="ic-qty">20 un.</span><span class="ic-unit">· grelhado na brasa</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 4/un.</span><span class="ic-total">R$ 80</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACOMPANHAMENTOS + SALADAS -->
+  <div class="cat-section">
+    <div class="cat-header">
+      <span class="ch-icon">🍚</span>
+      <div class="ch-text">
+        <span class="ch-eyebrow">03 — Bases</span>
+        <span class="ch-title">Acompanhamentos & Saladas</span>
+      </div>
+      <span class="ch-total">R$ 298</span>
+    </div>
+    <div class="items-grid six-col">
+      <div class="item-card mid">
+        <div class="ic-name">Arroz Branco</div>
+        <div class="ic-detail-row"><span class="ic-qty">5 kg</span><span class="ic-unit">· com ervas finas</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 8/kg</span><span class="ic-total">R$ 40</span></div>
+      </div>
+      <div class="item-card mid">
+        <div class="ic-name">Farofa Especial</div>
+        <div class="ic-detail-row"><span class="ic-qty">4 kg</span><span class="ic-unit">· com bacon crocante</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 18/kg</span><span class="ic-total">R$ 72</span></div>
+      </div>
+      <div class="item-card mid">
+        <div class="ic-name">Vinagrete Clássico</div>
+        <div class="ic-detail-row"><span class="ic-qty">4 kg</span><span class="ic-unit">· tomate, cebola, pimentão</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 15/kg</span><span class="ic-total">R$ 60</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Mix de Folhas</div>
+        <div class="ic-detail-row"><span class="ic-qty">4 kg</span><span class="ic-unit">· alface, rúcula, tomate</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 18/kg</span><span class="ic-total">R$ 72</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Cenoura Ralada</div>
+        <div class="ic-detail-row"><span class="ic-qty">3 kg</span><span class="ic-unit">· fresca, temperada</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 8/kg</span><span class="ic-total">R$ 24</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Repolho com Milho</div>
+        <div class="ic-detail-row"><span class="ic-qty">3 kg</span><span class="ic-unit">· coleslaw da casa</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 10/kg</span><span class="ic-total">R$ 30</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOBREMESAS -->
+  <div class="cat-section">
+    <div class="cat-header">
+      <span class="ch-icon">🍰</span>
+      <div class="ch-text">
+        <span class="ch-eyebrow">04 — Doces</span>
+        <span class="ch-title">Mesa de Sobremesas</span>
+      </div>
+      <span class="ch-total">R$ 382</span>
+    </div>
+    <div class="items-grid four-col">
+      <div class="item-card">
+        <div class="ic-name">Pudim de Leite</div>
+        <div class="ic-detail-row"><span class="ic-qty">4 kg</span><span class="ic-unit">· clássico</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 28/kg</span><span class="ic-total">R$ 112</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Mousse de Maracujá</div>
+        <div class="ic-detail-row"><span class="ic-qty">4 kg</span><span class="ic-unit">· cremoso</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 24/kg</span><span class="ic-total">R$ 96</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Salada de Frutas</div>
+        <div class="ic-detail-row"><span class="ic-qty">5 kg</span><span class="ic-unit">· frutas da estação</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 18/kg</span><span class="ic-total">R$ 90</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Mousse Choc. Vegano</div>
+        <div class="ic-detail-row"><span class="ic-qty">3 kg</span><span class="ic-unit">· plant-based, intenso</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 28/kg</span><span class="ic-total">R$ 84</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEBIDAS -->
+  <div class="cat-section">
+    <div class="cat-header">
+      <span class="ch-icon">🍹</span>
+      <div class="ch-text">
+        <span class="ch-eyebrow">05 — Open Bar</span>
+        <span class="ch-title">Bebidas</span>
+      </div>
+      <span class="ch-total">R$ 1.872</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card dark">
+        <div class="ic-name">Água Mineral</div>
+        <div class="ic-detail-row"><span class="ic-qty">40 L</span><span class="ic-unit">· com e sem gás</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 1,80/L</span><span class="ic-total">R$ 72</span></div>
+      </div>
+      <div class="item-card dark">
+        <div class="ic-name">Refrigerante</div>
+        <div class="ic-detail-row"><span class="ic-qty">60 L</span><span class="ic-unit">· diversas marcas</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 4/L</span><span class="ic-total">R$ 240</span></div>
+      </div>
+      <div class="item-card dark">
+        <div class="ic-name">Suco Natural</div>
+        <div class="ic-detail-row"><span class="ic-qty">30 L</span><span class="ic-unit">· polpas selecionadas</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 6/L</span><span class="ic-total">R$ 180</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Chá Gelado</div>
+        <div class="ic-detail-row"><span class="ic-qty">20 L</span><span class="ic-unit">· limão e pêssego</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 4/L</span><span class="ic-total">R$ 80</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Cerveja Artesanal</div>
+        <div class="ic-detail-row"><span class="ic-qty">100 L</span><span class="ic-unit">· gelada, diversas</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 8/L</span><span class="ic-total">R$ 800</span></div>
+      </div>
+      <div class="item-card">
+        <div class="ic-name">Caipirinha</div>
+        <div class="ic-detail-row"><span class="ic-qty">25 L</span><span class="ic-unit">· clássica e de frutas</span></div>
+        <div class="ic-price-row"><span class="ic-unit-price">R$ 20/L</span><span class="ic-total">R$ 500</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTRUTURA & ENTRETENIMENTO -->
+  <div class="cat-section">
+    <div class="cat-header">
+      <span class="ch-icon">🪑</span>
+      <div class="ch-text">
+        <span class="ch-eyebrow">06 — Operação</span>
+        <span class="ch-title">Estrutura & Entretenimento</span>
+      </div>
+      <span class="ch-total">R$ 3.000</span>
+    </div>
+    <div class="items-grid two-col">
+      <div class="service-card dark">
+        <div class="sc-left">
+          <div class="sc-name">Mesas & Cadeiras</div>
+          <div class="sc-desc">Locação completa, montagem e desmontagem inclusa</div>
+        </div>
+        <div class="sc-price">R$ 1.200</div>
+      </div>
+      <div class="service-card dark">
+        <div class="sc-left">
+          <div class="sc-name">Área de Churrasco</div>
+          <div class="sc-desc">Equipamentos, churrasqueiras e suporte operacional</div>
+        </div>
+        <div class="sc-price">R$ 800</div>
+      </div>
+      <div class="service-card">
+        <div class="sc-left">
+          <div class="sc-name">Utensílios & Descartáveis</div>
+          <div class="sc-desc">Pratos, talheres, copos e embalagens premium</div>
+        </div>
+        <div class="sc-price">R$ 600</div>
+      </div>
+      <div class="service-card">
+        <div class="sc-left">
+          <div class="sc-name">DJ para o Evento</div>
+          <div class="sc-desc">Trilha sonora ao vivo, das 18h às 23h30</div>
+        </div>
+        <div class="sc-price">R$ 400</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /plan-body -->
+
+<!-- SUMMARY -->
+<div class="summary-section">
+  <div class="sum-table-wrap">
+    <div class="sum-eyebrow">Resumo do Plano Premium</div>
+    <div class="sum-row"><div class="sum-cat"><span class="sum-ico">🥩</span><span class="sum-name">Churrasco</span></div><span class="sum-val">R$ 1.035</span></div>
+    <div class="sum-row"><div class="sum-cat"><span class="sum-ico">🍚</span><span class="sum-name">Acompanhamentos</span></div><span class="sum-val">R$ 172</span></div>
+    <div class="sum-row"><div class="sum-cat"><span class="sum-ico">🥗</span><span class="sum-name">Saladas</span></div><span class="sum-val">R$ 126</span></div>
+    <div class="sum-row"><div class="sum-cat"><span class="sum-ico">🍰</span><span class="sum-name">Sobremesas</span></div><span class="sum-val">R$ 382</span></div>
+    <div class="sum-row"><div class="sum-cat"><span class="sum-ico">🍹</span><span class="sum-name">Bebidas</span></div><span class="sum-val">R$ 1.872</span></div>
+    <div class="sum-row"><div class="sum-cat"><span class="sum-ico">🎧</span><span class="sum-name">DJ</span></div><span class="sum-val">R$ 400</span></div>
+    <div class="sum-row"><div class="sum-cat"><span class="sum-ico">🪑</span><span class="sum-name">Estrutura</span></div><span class="sum-val">R$ 2.600</span></div>
+    <div class="sum-row highlight"><div class="sum-cat"><span class="sum-ico">📦</span><span class="sum-name">Base de insumos</span></div><span class="sum-val">R$ 6.587</span></div>
+    <div class="sum-row highlight"><div class="sum-cat"><span class="sum-ico">✦</span><span class="sum-name">Transporte · Montagem · Margem</span></div><span class="sum-val">R$ 1.743</span></div>
+  </div>
+  <div class="total-panel">
+    <div class="tp-badge">★ Plano Premium ★</div>
+    <div class="tp-label">Investimento Total</div>
+    <div class="tp-val">R$ 16.000</div>
+    <div class="tp-divider"></div>
+    <div class="tp-per">≈ R$ 320 por pessoa</div>
+    <div class="tp-note">Valor final ao cliente incluindo todos os serviços e operação completa</div>
+  </div>
+</div>
+
+<!-- DIFERENCIAIS -->
+<div class="differentials">
+  <div class="diff-eyebrow">Por que escolher este plano</div>
+  <h2 class="diff-title">O que faz o Premium<br><em>ser especial</em></h2>
+  <div class="diff-grid">
+    <div class="diff-item"><span class="di-icon">🔥</span><div class="di-title">Cortes Nobres ao Vivo</div><p class="di-desc">Picanha, fraldinha e linguiça artesanal preparados na brasa na frente dos convidados, com o drama e o aroma que só o fogo proporciona.</p></div>
+    <div class="diff-item"><span class="di-icon">🌱</span><div class="di-title">100% Inclusivo</div><p class="di-desc">Opções veganas e vegetarianas completas lado a lado com o churrasco. Todos os convidados têm uma experiência gastronômica de igual qualidade.</p></div>
+    <div class="diff-item"><span class="di-icon">🍹</span><div class="di-title">Open Bar Premium</div><p class="di-desc">Água, sucos naturais, chá gelado, refrigerante, cerveja artesanal e caipirinha de frutas. Ninguém fica de mãos vazias.</p></div>
+    <div class="diff-item"><span class="di-icon">🎧</span><div class="di-title">DJ Incluso</div><p class="di-desc">Trilha sonora curada do início ao fim, criando a atmosfera certa para cada momento da noite — do aperitivo ao encerramento.</p></div>
+    <div class="diff-item"><span class="di-icon">🐾</span><div class="di-title">Pet Friendly</div><p class="di-desc">A chácara possui área dedicada para os pets, com água fresca e monitores. Toda a família é bem-vinda nesta celebração.</p></div>
+    <div class="diff-item"><span class="di-icon">📊</span><div class="di-title">Padrão Técnico de Buffet</div><p class="di-desc">400g de carne · 3L de bebida · 300g de acompanhamentos · 150g de sobremesa por pessoa. Calculado para zero desperdício e máxima farda.</p></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="plan-cta" id="cta">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">— Pronto para confirmar —</div>
+    <h2 class="cta-title">Contratar o Plano<br><em>Premium</em></h2>
+    <p class="cta-sub">Entre em contato agora e garanta sua data na agenda do Chama Viva.<br>Vagas limitadas por evento.</p>
+    <a href="#" class="cta-btn">Falar pelo WhatsApp</a>
+    <p class="cta-note">Ou envie um email · resposta em até 24h</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-logo">CHAMA VIVA</div>
+    <div class="foot-tag">— Grand Buffet Event —</div>
+  </div>
+  <div class="foot-copy">© 2025 Chama Viva. Todos os direitos reservados.</div>
+  <div class="foot-med"><span>CV</span></div>
+</footer>
+
+</body>
+</html>
